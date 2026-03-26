@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard PSJ — Cuotas sin Interés</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f0f0f0; }
+.top-bar { background: #FFD200; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+.top-bar h1 { font-size: 17px; font-weight: 700; color: #1a1a1a; }
+.top-bar .fecha { font-size: 12px; color: #444; }
+.tabs { background: #1a1a1a; display: flex; }
+.tab { padding: 12px 28px; color: #aaa; font-size: 13px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; }
+.tab:hover { color: #fff; }
+.tab.active { color: #FFD200; border-bottom: 3px solid #FFD200; }
+.page { display: none; padding: 24px 32px; }
+.page.active { display: block; }
+.kpi-row { display: flex; gap: 16px; margin-bottom: 24px; }
+.kpi { background: white; border-radius: 8px; padding: 16px 20px; flex: 1; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-top: 3px solid #FFD200; }
+.kpi .label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.kpi .value { font-size: 26px; font-weight: 700; color: #1a1a1a; }
+.kpi .sub { font-size: 11px; color: #aaa; margin-top: 3px; }
+.kpi .up { color: #2e7d32; font-size: 12px; }
+.kpi .down { color: #c62828; font-size: 12px; }
+.chart-row { display: flex; gap: 16px; margin-bottom: 24px; }
+.chart-box { background: white; border-radius: 8px; padding: 20px; flex: 1; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.chart-box.full { flex: 2; }
+.chart-box h3 { font-size: 13px; color: #555; margin-bottom: 16px; font-weight: 600; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+.tbl th { background: #FFD200; color: #1a1a1a; padding: 8px 12px; text-align: right; font-weight: 700; }
+.tbl th:first-child { text-align: left; }
+.tbl td { padding: 7px 12px; text-align: right; border-bottom: 1px solid #f0f0f0; color: #333; }
+.tbl td:first-child { text-align: left; font-weight: 600; }
+.tbl tr:hover td { background: #fffde7; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+.badge.green { background: #e8f5e9; color: #2e7d32; }
+.badge.yellow { background: #fff9c4; color: #f57f17; }
+.badge.red { background: #ffebee; color: #c62828; }
+.filter-row { display: flex; align-items: center; gap: 10px; }
+.filter-row label { font-size: 11px; color: #666; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; }
+.filter-row select { font-size: 12px; padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; background: white; cursor: pointer; color: #333; }
+.placeholder { background: white; border-radius: 8px; padding: 48px; text-align: center; color: #aaa; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+.placeholder .icon { font-size: 40px; margin-bottom: 12px; }
+.placeholder p { font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>PSJ — Cuotas sin Interés · Dashboard de Resultados</h1>
+  <span class="fecha">Actualizado: 26/03/2026</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showPage(0)">📊 Resumen del Mes</div>
+  <div class="tab" onclick="showPage(1)">📈 Impacto por Cohort</div>
+  <div class="tab" onclick="showPage(2)">📡 Canales</div>
+</div>
+
+<!-- PAGE 1: RESUMEN -->
+<div class="page active" id="page0">
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="label">Nuevos opt-ins Mar-26</div>
+      <div class="value">21.951</div>
+      <div class="sub"><span class="down">▼ -5.298 vs feb</span></div>
+    </div>
+    <div class="kpi">
+      <div class="label">Activos PSJ Point M0</div>
+      <div class="value">670</div>
+      <div class="sub">de 6.422 sellers Point</div>
+    </div>
+    <div class="kpi">
+      <div class="label">% Adopción Point</div>
+      <div class="value">10,4%</div>
+      <div class="sub">Mar-26 · M0</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Activos PSJ QR M0</div>
+      <div class="value">103</div>
+      <div class="sub">de 5.792 sellers QR</div>
+    </div>
+    <div class="kpi">
+      <div class="label">% Adopción QR</div>
+      <div class="value">1,8%</div>
+      <div class="sub">Mar-26 · M0</div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-box full">
+      <h3>Nuevos opt-ins por mes — por fuente de activación</h3>
+      <canvas id="chartOptins" height="100"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Mix de fuentes — Mar-26</h3>
+      <canvas id="chartFuentes" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-box full">
+      <h3>% Adopción PSJ en M0 por cohort — Point vs QR</h3>
+      <canvas id="chartAdopcion" height="110"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Opt-ins histórico por fuente</h3>
+      <table class="tbl" style="margin-top:4px">
+        <thead><tr><th>Fuente</th><th>Total</th><th>%</th></tr></thead>
+        <tbody id="tablaFuentes"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: IMPACTO -->
+<div class="page" id="page1">
+  <div class="kpi-row" id="kpiImpacto">
+    <!-- filled by JS -->
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-box full">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <h3 style="margin:0">Curva de adopción PSJ — % sellers activos por mes de vida</h3>
+        <div class="filter-row">
+          <label>Producto:</label>
+          <select id="selProd" onchange="updateImpacto()">
+            <option value="point">Point</option>
+            <option value="qr">QR</option>
+          </select>
+          <label>Cohort:</label>
+          <select id="selCohort" onchange="updateImpacto()">
+            <option value="all">Todos</option>
+          </select>
+        </div>
+      </div>
+      <div id="adoptBaseLabel" style="font-size:11px;color:#888;margin-bottom:6px;"></div>
+      <canvas id="chartCurva" height="120"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-box full">
+      <h3 id="tpvIncrTitle">TPV Incremental vs M-1 — ARS total PSJ vs Sin PSJ (Point)</h3>
+      <div id="tpvBaseLabel" style="font-size:11px;color:#888;margin-bottom:6px;"></div>
+      <canvas id="chartTpvIncr" height="120"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3 id="tpvAbsTitle">TPV Absoluto — ARS total PSJ + Sin PSJ (Point)</h3>
+      <canvas id="chartTpvAbs" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-box full">
+      <h3 id="vcIncrTitle">Rentabilidad Incremental vs M-1 — VC USD total PSJ vs Sin PSJ (Point)</h3>
+      <canvas id="chartVcIncr" height="120"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>% Adopción M0 por cohort</h3>
+      <canvas id="chartAdopM0" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <h3>Resultados por cohort — Nov-25 / Mar-26</h3>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Cohort</th>
+          <th>Opt-ins</th>
+          <th>Q Point Total</th>
+          <th>PSJ Point M0</th>
+          <th>% Adopt Point</th>
+          <th>Q QR Total</th>
+          <th>PSJ QR M0</th>
+          <th>% Adopt QR</th>
+          <th>VC PSJ M0 (USD)</th>
+        </tr>
+      </thead>
+      <tbody id="tablaCohorts"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PAGE 3: CANALES -->
+<div class="page" id="page2">
+  <div class="placeholder">
+    <div class="icon">📡</div>
+    <p><strong>Canales PSJ — pendiente de datos</strong></p>
+    <p style="margin-top:8px">Correr la query de canales PSJ desde BQ Console y compartir el resultado para actualizar esta sección.</p>
+    <p style="margin-top:8px; font-size:11px; color:#bbb">La query ya está lista (misma estructura que Suscripciones, filtra Producto = 'PSJ')</p>
+  </div>
+</div>
+
+<script>
+function fmt(n) { return Math.round(n).toLocaleString('es-AR'); }
+function fmtM(n) { return '$' + (n/1000000).toFixed(1) + 'M'; }
+function fmtUSD(n) { return 'USD ' + (n/1000000).toFixed(1) + 'M'; }
+function fmtPct(n) { return n.toFixed(1) + '%'; }
+
+// ---- DATOS ----
+const COHORT_LABELS = {'202511':'Nov-25','202512':'Dic-25','202601':'Ene-26','202602':'Feb-26','202603':'Mar-26'};
+const COHORT_LIST = ['202511','202512','202601','202602','202603'];
+const MESES_EVOL = ['Nov-25','Dic-25','Ene-26','Feb-26','Mar-26'];
+const PSJ_MONTHS = ['M-1','M0','M1','M2','M3','M4'];
+
+// Opt-ins por fuente y mes
+const OPTIN_CIRCLE = [11407, 36719, 20032, 11215, 7274];
+const OPTIN_MODAL  = [14445, 884,   1971,  5810,  11004];
+const OPTIN_WSPP   = [0,     1,     6188,  10224, 3673];
+
+// ---- PSJ DATA ----
+// tpv_ars = TPV ARS PSJ sellers total | tpv_total = TPV ARS TOTAL sellers
+// vc_psj = VC USD PSJ sellers total   | vc_total  = VC USD TOTAL sellers
+const PSJ_DATA = {
+  '202511': {
+    optin: 25852,
+    point: {
+      adopt:     [1.03, 14.37, 17.63, 16.42, 15.50, 14.42],
+      q_psj:     [108,  1500,  1830,  1552,  1415,  1228],
+      q_total:   [10448,10440, 10379, 9450,  9127,  8519],
+      tpv_ars:   [51875298,   623636026,  1206716000, 972563497,  802539197,  704534904],
+      tpv_total: [7870813705, 8797842979, 11647697460,9904375719, 8741353558, 6924100929],
+      vc_psj:    [480507,   39806624,  86618654,  64300913,  119313265, 100275317],
+      vc_total:  [150872970,233145039, 335270796, 279795584, 366666643, 291208668]
+    },
+    qr: {
+      adopt:     [0.10, 2.04, 3.07, 2.56, 2.52, 2.23],
+      q_psj:     [10,   174,  251,  190,  178,  144],
+      q_total:   [10113,8533, 8167, 7428, 7064, 6466],
+      tpv_ars:   [1123312,   27330742,  39360218,  42975914,  36109314,  30052184],
+      tpv_total: [5516418272,6253850485,8494471129,8360705140,7537584023,5909299113],
+      vc_psj:    [20533,   1879889,  2766750,  2257394,  2357144,  4777658],
+      vc_total:  [37349479,49662078, 66542316, 64813379, 54401199, 53011416]
+    }
+  },
+  '202512': {
+    optin: 37603,
+    point: {
+      adopt:     [0.48, 17.79, 16.65, 16.43, 15.79, null],
+      q_psj:     [54,   2225,  1846,  1740,  1559,  null],
+      q_total:   [11183,12507, 11084, 10588, 9872,  null],
+      tpv_ars:   [13281670,    1628788084,  1716004328,  1698328033,  1252292258,  null],
+      tpv_total: [13019667740, 19606733664, 17036315004, 15408319280, 12113571330, null],
+      vc_psj:    [40207,    103317787, 95196842,  237672260, 181143082, null],
+      vc_total:  [271839114,546241390, 471631497, 664181709, 508723484, null]
+    },
+    qr: {
+      adopt:     [0.12, 2.82, 2.51, 2.69, 2.50, null],
+      q_psj:     [17,   335,  261,  258,  220,  null],
+      q_total:   [13697,11875,10401,9605, 8790, null],
+      tpv_ars:   [5517815,    77090238,   63690866,   74071642,   42560503,   null],
+      tpv_total: [10474140060,15108374033,14372375533,12980665718,10231019681,null],
+      vc_psj:    [197494,  5122066,  3859649,  4488675,  5806030,  null],
+      vc_total:  [71891877,119975805,114386403,98499837, 86481053, null]
+    }
+  },
+  '202601': {
+    optin: 28191,
+    point: {
+      adopt:     [0.30, 15.69, 16.96, 16.71, null, null],
+      q_psj:     [23,   1146,  1185,  1082,  null, null],
+      q_total:   [7590, 7306,  6986,  6476,  null, null],
+      tpv_ars:   [27016923,   783316816,  939674511,  844164552,  null, null],
+      tpv_total: [10367264458,10825981963,10188351800,8007223868, null, null],
+      vc_psj:    [-4755,    48001806,  123472886, 109734920, null, null],
+      vc_total:  [218417335,303508518, 420686538, 323510146, null, null]
+    },
+    qr: {
+      adopt:     [0.03, 2.55, 2.96, 2.47, null, null],
+      q_psj:     [3,    189,  202,  150,  null, null],
+      q_total:   [9194, 7416, 6818, 6066, null, null],
+      tpv_ars:   [948000,    47530059,  60102302,  27346363,  null, null],
+      tpv_total: [8245520325,8763577691,8254500561,6453249183,null, null],
+      vc_psj:    [-101,     3018226,  3798226,  3194549,  null, null],
+      vc_total:  [57248417, 69994504, 63946109, 57505675, null, null]
+    }
+  },
+  '202602': {
+    optin: 27249,
+    point: {
+      adopt:     [0.46, 9.62, 10.61, null, null, null],
+      q_psj:     [22,   474,  478,   null, null, null],
+      q_total:   [4783, 4926, 4505,  null, null, null],
+      tpv_ars:   [40035868,   269115842,  306596261,  null, null, null],
+      tpv_total: [5508283366, 5873034719, 4857209076, null, null, null],
+      vc_psj:    [2139013,  37599481,  40839855,  null, null, null],
+      vc_total:  [117970838,198276554, 171579131, null, null, null]
+    },
+    qr: {
+      adopt:     [0.12, 1.64, 1.58, null, null, null],
+      q_psj:     [10,   101,  84,   null, null, null],
+      q_total:   [8171, 6165, 5315, null, null, null],
+      tpv_ars:   [3615623,   20365249,  26129649,  null, null, null],
+      tpv_total: [5181297289,5289954311,4478165122,null, null, null],
+      vc_psj:    [17520,    1379521,  4549969,  null, null, null],
+      vc_total:  [35125433, 37145802, 39114984, null, null, null]
+    }
+  },
+  '202603': {
+    optin: 21951,
+    point: {
+      adopt:     [0.34, 10.43, null, null, null, null],
+      q_psj:     [22,   670,   null, null, null, null],
+      q_total:   [6497, 6422,  null, null, null, null],
+      tpv_ars:   [10090361,   323824258,  null, null, null, null],
+      tpv_total: [5964071899, 5940767408, null, null, null, null],
+      vc_psj:    [138670,   39138968,  null, null, null, null],
+      vc_total:  [150087134,208861017, null, null, null, null]
+    },
+    qr: {
+      adopt:     [0.10, 1.78, null, null, null, null],
+      q_psj:     [7,    103,  null, null, null, null],
+      q_total:   [7183, 5792, null, null, null, null],
+      tpv_ars:   [4033647,   17797709,  null, null, null, null],
+      tpv_total: [5607014935,5169632541,null, null, null, null],
+      vc_psj:    [122265,   2057523,  null, null, null, null],
+      vc_total:  [33282259, 40148875, null, null, null, null]
+    }
+  }
+};
+
+// ---- PAGE 1 CHARTS ----
+new Chart(document.getElementById('chartOptins'), {
+  type: 'bar',
+  data: {
+    labels: MESES_EVOL,
+    datasets: [
+      { label: 'Circle (Always On)', data: OPTIN_CIRCLE, backgroundColor: '#FFD200', borderRadius: 4, stack: 's' },
+      { label: 'Ad Hoc Modal',       data: OPTIN_MODAL,  backgroundColor: '#FF8F00', borderRadius: 4, stack: 's' },
+      { label: 'Ad Hoc WhatsApp',    data: OPTIN_WSPP,   backgroundColor: '#1a1a1a', borderRadius: 4, stack: 's' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
+    scales: {
+      x: { stacked: true, grid: { display: false } },
+      y: { stacked: true, grid: { color: '#f5f5f5' }, ticks: { callback: v => fmt(v) } }
+    }
+  }
+});
+
+// Fuentes Mar-26 donut
+new Chart(document.getElementById('chartFuentes'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Circle', 'Ad Hoc Modal Bloqueante', 'Ad Hoc Modal FTU', 'Ad Hoc WhatsApp'],
+    datasets: [{ data: [7274, 8841, 2163, 3673], backgroundColor: ['#FFD200','#FF8F00','#FFB300','#1a1a1a'], borderWidth: 2 }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 10 } } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${fmt(ctx.raw)}` } }
+    }
+  }
+});
+
+// Adopción M0 Point vs QR por cohort
+new Chart(document.getElementById('chartAdopcion'), {
+  type: 'bar',
+  data: {
+    labels: MESES_EVOL,
+    datasets: [
+      { label: '% Adopción Point M0', data: [14.37, 17.79, 15.69, 9.62, 10.43], backgroundColor: '#FFD200', borderRadius: 4 },
+      { label: '% Adopción QR M0',    data: [2.04,  2.82,  2.55,  1.64, 1.78],  backgroundColor: '#1a1a1a', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => v + '%' } }
+    }
+  }
+});
+
+// Tabla fuentes históricas
+const fuentesTotals = [
+  { f: 'Circle (Always On)',    n: 11407+36719+20032+11215+7274 },
+  { f: 'Ad Hoc Modal',          n: 14445+884+1971+5810+11004 },
+  { f: 'Ad Hoc WhatsApp',       n: 1+6188+10224+3673 }
+];
+const totalOptin = fuentesTotals.reduce((s,d) => s+d.n, 0);
+const tblaF = document.getElementById('tablaFuentes');
+fuentesTotals.forEach(d => {
+  tblaF.innerHTML += `<tr><td>${d.f}</td><td>${fmt(d.n)}</td><td>${(d.n/totalOptin*100).toFixed(1)}%</td></tr>`;
+});
+tblaF.innerHTML += `<tr style="font-weight:700"><td>Total</td><td>${fmt(totalOptin)}</td><td>100%</td></tr>`;
+
+// ---- PAGE 2 ----
+// Populate cohort dropdown
+COHORT_LIST.forEach(c => {
+  const opt = document.createElement('option');
+  opt.value = c; opt.textContent = COHORT_LABELS[c];
+  document.getElementById('selCohort').appendChild(opt);
+});
+
+function computeAdoptCurva(prod, cohortFilter) {
+  const sums = new Array(6).fill(0), cnts = new Array(6).fill(0);
+  COHORT_LIST.forEach(c => {
+    if (cohortFilter !== 'all' && c !== cohortFilter) return;
+    const d = PSJ_DATA[c][prod].adopt;
+    d.forEach((v, i) => { if (v !== null) { sums[i] += v; cnts[i]++; } });
+  });
+  return sums.map((s, i) => cnts[i] > 0 ? +(s/cnts[i]).toFixed(2) : null);
+}
+
+function computeKpiImpacto(prod, cohortFilter) {
+  let sumAdopt = 0, cntAdopt = 0, sumQpsj = 0, sumVc = 0;
+  COHORT_LIST.forEach(c => {
+    if (cohortFilter !== 'all' && c !== cohortFilter) return;
+    const d = PSJ_DATA[c][prod];
+    if (d.adopt[1] !== null) { sumAdopt += d.adopt[1]; cntAdopt++; }
+    if (d.q_psj[1] !== null) sumQpsj += d.q_psj[1];
+    if (d.vc_psj[1] !== null && d.vc_psj[1] > 0) sumVc += d.vc_psj[1];
+  });
+  return {
+    adoptM0: cntAdopt > 0 ? (sumAdopt/cntAdopt).toFixed(1) : '—',
+    qPsj: sumQpsj,
+    vcM0: sumVc
+  };
+}
+
+function updateKpiImpacto(prod, cohortFilter) {
+  const k = computeKpiImpacto(prod, cohortFilter);
+  const prodLabel = prod === 'point' ? 'Point' : 'QR';
+  document.getElementById('kpiImpacto').innerHTML = `
+    <div class="kpi"><div class="label">% Adopción M0 Prom (${prodLabel})</div><div class="value">${k.adoptM0}%</div><div class="sub">promedio cohorts seleccionados</div></div>
+    <div class="kpi"><div class="label">Sellers PSJ ${prodLabel} M0</div><div class="value">${fmt(k.qPsj)}</div><div class="sub">activaciones en el mes</div></div>
+    <div class="kpi"><div class="label">VC PSJ ${prodLabel} M0</div><div class="value">USD ${fmt(Math.round(k.vcM0/1e6))}M</div><div class="sub">rentabilidad generada</div></div>
+  `;
+}
+
+const initAdopt = computeAdoptCurva('point', 'all');
+const curvaChart = new Chart(document.getElementById('chartCurva'), {
+  type: 'bar',
+  data: {
+    labels: PSJ_MONTHS,
+    datasets: [{
+      label: '% Adopción PSJ',
+      data: initAdopt,
+      backgroundColor: initAdopt.map((v, i) => i === 0 ? '#e0e0e0' : '#FFD200'),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.raw !== null ? ` ${ctx.raw.toFixed(1)}% de sellers activos con PSJ` : ' sin datos' } }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => v + '%' }, suggestedMax: 25 }
+    }
+  },
+  plugins: [{
+    id: 'adoptLabels',
+    afterDatasetsDraw(chart) {
+      const { ctx, data } = chart;
+      chart.getDatasetMeta(0).data.forEach((bar, i) => {
+        const v = data.datasets[0].data[i];
+        if (v === null) return;
+        ctx.save();
+        ctx.fillStyle = '#555'; ctx.font = '10px Arial'; ctx.textAlign = 'center';
+        ctx.fillText(v.toFixed(1) + '%', bar.x, bar.y - 5);
+        ctx.restore();
+      });
+    }
+  }]
+});
+
+document.getElementById('adoptBaseLabel').textContent = 'M-1 = tasa de adopción PRE opt-in (baseline) · M0 en adelante = % sellers con PSJ activo por mes de vida';
+updateKpiImpacto('point', 'all');
+
+// Chart adopción M0 por cohort (se actualiza con el filtro de producto)
+const adoptM0Chart = new Chart(document.getElementById('chartAdopM0'), {
+  type: 'bar',
+  data: {
+    labels: MESES_EVOL,
+    datasets: [{
+      label: '% Adopción M0',
+      data: COHORT_LIST.map(c => PSJ_DATA[c].point.adopt[1]),
+      backgroundColor: '#FFD200',
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => v + '%' } }
+    }
+  }
+});
+
+// ---- TPV / VC TOTAL FUNCTIONS (aggregate sums, not per-user) ----
+function fmtBig(n) {
+  if (n === null) return '—';
+  const abs = Math.abs(n);
+  if (abs >= 1e9) return (n/1e9).toFixed(1)+'B';
+  return (n/1e6).toFixed(0)+'M';
+}
+
+// Incremental vs M-1: for each month i, only includes cohorts with data for both M-1 and Mi
+function computeTotalIncr(prod, cohortFilter, psjField, totalField) {
+  const nMonths = 6;
+  const psjIncr = new Array(nMonths).fill(null);
+  const sinIncr = new Array(nMonths).fill(null);
+  let basePsj = 0;
+  for (let i = 0; i < nMonths; i++) {
+    let pBase=0, pCur=0, sBase=0, sCur=0, hasData=false;
+    COHORT_LIST.forEach(c => {
+      if (cohortFilter !== 'all' && c !== cohortFilter) return;
+      const d = PSJ_DATA[c][prod];
+      const bv=d[psjField][0], cv=d[psjField][i];
+      if (bv===null||cv===null) return;
+      pBase+=bv; pCur+=cv; hasData=true;
+      const bt=d[totalField][0], ct=d[totalField][i];
+      if (bt!==null&&ct!==null) { sBase+=(bt-bv); sCur+=(ct-cv); }
+    });
+    if (i===0) basePsj = pBase;
+    psjIncr[i] = hasData ? Math.round(pCur-pBase) : null;
+    sinIncr[i] = hasData ? Math.round(sCur-sBase) : null;
+  }
+  return { psjValues: psjIncr, sinValues: sinIncr, basePsj };
+}
+
+// Absolute aggregate totals per month
+function computeTotalAbs(prod, cohortFilter, psjField, totalField) {
+  const nMonths = 6;
+  const psjAbs = new Array(nMonths).fill(null);
+  const sinAbs = new Array(nMonths).fill(null);
+  for (let i = 0; i < nMonths; i++) {
+    let pSum=0, sSum=0, hasData=false;
+    COHORT_LIST.forEach(c => {
+      if (cohortFilter !== 'all' && c !== cohortFilter) return;
+      const d = PSJ_DATA[c][prod];
+      if (d[psjField][i]===null) return;
+      pSum+=d[psjField][i]; hasData=true;
+      if (d[totalField][i]!==null) sSum+=(d[totalField][i]-d[psjField][i]);
+    });
+    psjAbs[i] = hasData ? Math.round(pSum) : null;
+    sinAbs[i] = hasData ? Math.round(sSum) : null;
+  }
+  return { psjValues: psjAbs, sinValues: sinAbs };
+}
+
+// ---- TPV INCREMENTAL CHART ----
+const initTpvIncr = computeTotalIncr('point', 'all', 'tpv_ars', 'tpv_total');
+const tpvIncrChart = new Chart(document.getElementById('chartTpvIncr'), {
+  type: 'bar',
+  data: {
+    labels: PSJ_MONTHS,
+    datasets: [
+      { label: 'PSJ', data: initTpvIncr.psjValues,
+        backgroundColor: initTpvIncr.psjValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#FFD200'), borderRadius:4 },
+      { label: 'Sin PSJ', data: initTpvIncr.sinValues,
+        backgroundColor: initTpvIncr.sinValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#546e7a'), borderRadius:4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display:true, position:'top', labels:{font:{size:11}} },
+      tooltip: { callbacks: { label: ctx => ctx.raw===null?' sin datos':` ${ctx.raw>=0?'+':''}$${fmtBig(ctx.raw)} ARS vs M-1` } }
+    },
+    scales: {
+      x: { grid:{display:false} },
+      y: { grid:{color:'#f5f5f5'}, ticks:{callback: v=>(v>=0?'+':'')+'$'+fmtBig(v)} }
+    }
+  }
+});
+document.getElementById('tpvBaseLabel').textContent = `TPV PSJ base M-1: $${fmtBig(initTpvIncr.basePsj)} ARS (suma cohorts)`;
+
+// ---- TPV ABSOLUTO CHART ----
+const initTpvAbs = computeTotalAbs('point', 'all', 'tpv_ars', 'tpv_total');
+const tpvAbsChart = new Chart(document.getElementById('chartTpvAbs'), {
+  type: 'bar',
+  data: {
+    labels: PSJ_MONTHS,
+    datasets: [
+      { label: 'PSJ', data: initTpvAbs.psjValues,
+        backgroundColor: initTpvAbs.psjValues.map((_,i)=>i===0?'#e0e0e0':'#FFD200'), borderRadius:4, stack:'s' },
+      { label: 'Sin PSJ', data: initTpvAbs.sinValues,
+        backgroundColor: '#546e7a', borderRadius:4, stack:'s' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {display:true, position:'top', labels:{font:{size:11}}},
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${fmtBig(ctx.raw)} ARS` } }
+    },
+    scales: {
+      x: { stacked:true, grid:{display:false} },
+      y: { stacked:true, grid:{color:'#f5f5f5'}, ticks:{callback: v=>'$'+fmtBig(v)} }
+    }
+  }
+});
+
+// ---- VC INCREMENTAL CHART ----
+const initVcIncr = computeTotalIncr('point', 'all', 'vc_psj', 'vc_total');
+const vcIncrChart = new Chart(document.getElementById('chartVcIncr'), {
+  type: 'bar',
+  data: {
+    labels: PSJ_MONTHS,
+    datasets: [
+      { label: 'VC PSJ', data: initVcIncr.psjValues,
+        backgroundColor: initVcIncr.psjValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#FFD200'), borderRadius:4 },
+      { label: 'VC Sin PSJ', data: initVcIncr.sinValues,
+        backgroundColor: initVcIncr.sinValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#546e7a'), borderRadius:4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {display:true, position:'top', labels:{font:{size:11}}},
+      tooltip: { callbacks: { label: ctx => ctx.raw===null?' sin datos':` ${ctx.raw>=0?'+':''}USD ${fmtBig(ctx.raw)} vs M-1` } }
+    },
+    scales: {
+      x: { grid:{display:false} },
+      y: { grid:{color:'#f5f5f5'}, ticks:{callback: v=>(v>=0?'+':'')+'USD '+fmtBig(v)} }
+    }
+  }
+});
+
+function updateImpacto() {
+  const prod = document.getElementById('selProd').value;
+  const cf = document.getElementById('selCohort').value;
+  const prodLabel = prod === 'point' ? 'Point' : 'QR';
+
+  // Adoption curve
+  const vals = computeAdoptCurva(prod, cf);
+  const ds = curvaChart.data.datasets[0];
+  ds.data = vals; ds.backgroundColor = vals.map((v,i)=>i===0?'#e0e0e0':'#FFD200');
+  curvaChart.update();
+
+  // Adoption M0 bar
+  adoptM0Chart.data.datasets[0].data = COHORT_LIST.map(c => {
+    if (cf !== 'all' && c !== cf) return null;
+    return PSJ_DATA[c][prod].adopt[1];
+  });
+  adoptM0Chart.update();
+
+  // TPV incremental
+  const tpvIncr = computeTotalIncr(prod, cf, 'tpv_ars', 'tpv_total');
+  tpvIncrChart.data.datasets[0].data = tpvIncr.psjValues;
+  tpvIncrChart.data.datasets[0].backgroundColor = tpvIncr.psjValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#FFD200');
+  tpvIncrChart.data.datasets[1].data = tpvIncr.sinValues;
+  tpvIncrChart.data.datasets[1].backgroundColor = tpvIncr.sinValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#546e7a');
+  tpvIncrChart.update();
+  document.getElementById('tpvBaseLabel').textContent = `TPV PSJ base M-1: $${fmtBig(tpvIncr.basePsj)} ARS (suma cohorts)`;
+  document.getElementById('tpvIncrTitle').textContent = `TPV Incremental vs M-1 — ARS total PSJ vs Sin PSJ (${prodLabel})`;
+
+  // TPV absoluto
+  const tpvAbs = computeTotalAbs(prod, cf, 'tpv_ars', 'tpv_total');
+  tpvAbsChart.data.datasets[0].data = tpvAbs.psjValues;
+  tpvAbsChart.data.datasets[0].backgroundColor = tpvAbs.psjValues.map((_,i)=>i===0?'#e0e0e0':'#FFD200');
+  tpvAbsChart.data.datasets[1].data = tpvAbs.sinValues;
+  tpvAbsChart.update();
+  document.getElementById('tpvAbsTitle').textContent = `TPV Absoluto — ARS total PSJ + Sin PSJ (${prodLabel})`;
+
+  // VC incremental
+  const vcIncr = computeTotalIncr(prod, cf, 'vc_psj', 'vc_total');
+  vcIncrChart.data.datasets[0].data = vcIncr.psjValues;
+  vcIncrChart.data.datasets[0].backgroundColor = vcIncr.psjValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#FFD200');
+  vcIncrChart.data.datasets[1].data = vcIncr.sinValues;
+  vcIncrChart.data.datasets[1].backgroundColor = vcIncr.sinValues.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#546e7a');
+  vcIncrChart.update();
+  document.getElementById('vcIncrTitle').textContent = `Rentabilidad Incremental vs M-1 — VC USD total PSJ vs Sin PSJ (${prodLabel})`;
+
+  updateKpiImpacto(prod, cf);
+}
+
+// ---- TABLA COHORTS ----
+const tbody = document.getElementById('tablaCohorts');
+COHORT_LIST.forEach(c => {
+  const d = PSJ_DATA[c];
+  const pAdopt = d.point.adopt[1] !== null ? d.point.adopt[1].toFixed(1) : '—';
+  const qAdopt = d.qr.adopt[1] !== null ? d.qr.adopt[1].toFixed(1) : '—';
+  const pBadge = d.point.adopt[1] >= 15 ? 'green' : d.point.adopt[1] >= 10 ? 'yellow' : 'red';
+  const qBadge = d.qr.adopt[1] >= 2.5 ? 'green' : d.qr.adopt[1] >= 1.5 ? 'yellow' : 'red';
+  const vcTotal = (d.point.vc_psj[1] || 0) + (d.qr.vc_psj[1] || 0);
+  tbody.innerHTML += `<tr>
+    <td>${COHORT_LABELS[c]}</td>
+    <td>${fmt(d.optin)}</td>
+    <td>${fmt(d.point.q_total[1] || 0)}</td>
+    <td>${fmt(d.point.q_psj[1] || 0)}</td>
+    <td><span class="badge ${pBadge}">${pAdopt}%</span></td>
+    <td>${fmt(d.qr.q_total[1] || 0)}</td>
+    <td>${fmt(d.qr.q_psj[1] || 0)}</td>
+    <td><span class="badge ${qBadge}">${qAdopt}%</span></td>
+    <td>${fmtUSD(vcTotal)}</td>
+  </tr>`;
+});
+
+// ---- TABS ----
+function showPage(i) {
+  document.querySelectorAll('.page').forEach((p,j) => p.classList.toggle('active', i===j));
+  document.querySelectorAll('.tab').forEach((t,j) => t.classList.toggle('active', i===j));
+}
+</script>
+</body>
+</html>
