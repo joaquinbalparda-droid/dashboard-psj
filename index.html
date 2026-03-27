@@ -49,7 +49,7 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
 
 <div class="top-bar">
   <h1>PSJ — Cuotas sin Interés · Dashboard de Resultados</h1>
-  <span class="fecha">Actualizado: 26/03/2026</span>
+  <span class="fecha">Actualizado: 27/03/2026</span>
 </div>
 
 <div class="tabs">
@@ -63,23 +63,23 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
   <div class="kpi-row">
     <div class="kpi">
       <div class="label">Nuevos opt-ins Mar-26</div>
-      <div class="value">21.951</div>
-      <div class="sub"><span class="down">▼ -5.298 vs feb</span></div>
+      <div class="value">22.671</div>
+      <div class="sub"><span class="down">▼ -3.936 vs feb</span></div>
     </div>
     <div class="kpi">
       <div class="label">Activos PSJ Point M0</div>
-      <div class="value">670</div>
-      <div class="sub">de 6.422 sellers Point</div>
+      <div class="value">694</div>
+      <div class="sub">de 6.466 sellers Point</div>
     </div>
     <div class="kpi">
       <div class="label">% Adopción Point</div>
-      <div class="value">10,4%</div>
+      <div class="value">10,7%</div>
       <div class="sub">Mar-26 · M0</div>
     </div>
     <div class="kpi">
       <div class="label">Activos PSJ QR M0</div>
-      <div class="value">103</div>
-      <div class="sub">de 5.792 sellers QR</div>
+      <div class="value">105</div>
+      <div class="sub">de 5.843 sellers QR</div>
     </div>
     <div class="kpi">
       <div class="label">% Adopción QR</div>
@@ -203,8 +203,8 @@ const MESES_EVOL = ['Nov-25','Dic-25','Ene-26','Feb-26','Mar-26'];
 const PSJ_MONTHS = ['M-1','M0','M1','M2','M3','M4'];
 
 // Opt-ins por fuente y mes
-const OPTIN_CIRCLE = [11407, 36719, 20032, 11215, 7274];
-const OPTIN_MODAL  = [14445, 884,   1971,  5810,  11004];
+const OPTIN_CIRCLE = [11407, 36719, 19893, 10573, 7994];
+const OPTIN_MODAL  = [14445, 883,   1971,  5810,  11004];
 const OPTIN_WSPP   = [0,     1,     6188,  10224, 3673];
 
 // ---- PSJ DATA ----
@@ -214,106 +214,106 @@ const PSJ_DATA = {
   '202511': {
     optin: 25852,
     point: {
-      adopt:     [1.03, 14.37, 17.63, 16.42, 15.50, 14.42],
-      q_psj:     [108,  1500,  1830,  1552,  1415,  1228],
-      q_total:   [10448,10440, 10379, 9450,  9127,  8519],
-      tpv_ars:   [51875298,   623636026,  1206716000, 972563497,  802539197,  704534904],
-      tpv_total: [7870813705, 8797842979, 11647697460,9904375719, 8741353558, 6924100929],
-      vc_psj:    [480507,   39806624,  86618654,  64300913,  119313265, 100275317],
-      vc_total:  [150872970,233145039, 335270796, 279795584, 366666643, 291208668]
+      adopt:     [1.03, 14.37, 17.63, 16.42, 15.50, 14.51],
+      q_psj:     [108,  1500,  1830,  1552,  1415,  1246],
+      q_total:   [10448,10440, 10379, 9450,  9127,  8591],
+      tpv_ars:   [51875298,   623636026,  1206715999, 972563497,  802539197,  728783849],
+      tpv_total: [7870813705, 8797842979, 11647697460,9904375719, 8741353558, 7174717808],
+      vc_psj:    [480507,   39806624,  86618654,  64300913,  119313265, 104164107],
+      vc_total:  [150872970,233145039, 335270796, 279795584, 366666643, 302740803]
     },
     qr: {
-      adopt:     [0.10, 2.04, 3.07, 2.56, 2.52, 2.23],
-      q_psj:     [10,   174,  251,  190,  178,  144],
-      q_total:   [10113,8533, 8167, 7428, 7064, 6466],
-      tpv_ars:   [1123312,   27330742,  39360218,  42975914,  36109314,  30052184],
-      tpv_total: [5516418272,6253850485,8494471129,8360705140,7537584023,5909299113],
-      vc_psj:    [20533,   1879889,  2766750,  2257394,  2357144,  4777658],
-      vc_total:  [37349479,49662078, 66542316, 64813379, 54401199, 53011416]
+      adopt:     [0.10, 2.04, 3.07, 2.56, 2.52, 2.25],
+      q_psj:     [10,   174,  251,  190,  178,  147],
+      q_total:   [10113,8533, 8167, 7428, 7064, 6536],
+      tpv_ars:   [1123312,   27330742,  39360218,  42975914,  36109314,  30466124],
+      tpv_total: [5516418272,6253850485,8494471129,8360705140,7537584023,6120051124],
+      vc_psj:    [20533,   1879889,  2766750,  2257394,  2357144,  4834496],
+      vc_total:  [37349479,49662078, 66542316, 64813379, 54401199, 54936850]
     }
   },
   '202512': {
     optin: 37603,
     point: {
-      adopt:     [0.48, 17.79, 16.65, 16.43, 15.79, null],
-      q_psj:     [54,   2225,  1846,  1740,  1559,  null],
-      q_total:   [11183,12507, 11084, 10588, 9872,  null],
-      tpv_ars:   [13281670,    1628788084,  1716004328,  1698328033,  1252292258,  null],
-      tpv_total: [13019667740, 19606733664, 17036315004, 15408319280, 12113571330, null],
-      vc_psj:    [40207,    103317787, 95196842,  237672260, 181143082, null],
-      vc_total:  [271839114,546241390, 471631497, 664181709, 508723484, null]
+      adopt:     [0.48, 17.79, 16.65, 16.43, 15.98, null],
+      q_psj:     [54,   2225,  1846,  1740,  1597,  null],
+      q_total:   [11183,12507, 11084, 10588, 9996,  null],
+      tpv_ars:   [13281670,   1628788084, 1716004328, 1698328033, 1299091462, null],
+      tpv_total: [13019667740,19606733664,17036315004,15408319280,12586485912,null],
+      vc_psj:    [40207,   103317787, 95196842,  237672260, 190654911, null],
+      vc_total:  [271839114,546241390, 471631497, 664181709, 534221616, null]
     },
     qr: {
-      adopt:     [0.12, 2.82, 2.51, 2.69, 2.50, null],
-      q_psj:     [17,   335,  261,  258,  220,  null],
-      q_total:   [13697,11875,10401,9605, 8790, null],
-      tpv_ars:   [5517815,    77090238,   63690866,   74071642,   42560503,   null],
-      tpv_total: [10474140060,15108374033,14372375533,12980665718,10231019681,null],
-      vc_psj:    [197494,  5122066,  3859649,  4488675,  5806030,  null],
-      vc_total:  [71891877,119975805,114386403,98499837, 86481053, null]
+      adopt:     [0.12, 2.82, 2.51, 2.69, 2.54, null],
+      q_psj:     [17,   335,  261,  258,  226,  null],
+      q_total:   [13697,11875,10401,9605, 8896, null],
+      tpv_ars:   [5517815,   77090238,  63690866,  74071642,  43217261,  null],
+      tpv_total: [10474140060,15108374033,14372375533,12980665718,10602053294,null],
+      vc_psj:    [197494,  5122066,  3859649,  4488675,  5912678,  null],
+      vc_total:  [71891877,119975805,114386403,98499837, 89769942, null]
     }
   },
   '202601': {
-    optin: 28191,
+    optin: 28052,
     point: {
-      adopt:     [0.30, 15.69, 16.96, 16.71, null, null],
-      q_psj:     [23,   1146,  1185,  1082,  null, null],
-      q_total:   [7590, 7306,  6986,  6476,  null, null],
-      tpv_ars:   [27016923,   783316816,  939674511,  844164552,  null, null],
-      tpv_total: [10367264458,10825981963,10188351800,8007223868, null, null],
-      vc_psj:    [-4755,    48001806,  123472886, 109734920, null, null],
-      vc_total:  [218417335,303508518, 420686538, 323510146, null, null]
+      adopt:     [0.30, 15.69, 16.96, 16.80, null, null],
+      q_psj:     [23,   1146,  1185,  1100,  null, null],
+      q_total:   [7590, 7306,  6986,  6547,  null, null],
+      tpv_ars:   [27016923,   783316816,  939674511,  872090437,  null, null],
+      tpv_total: [10367264458,10825981963,10188351800,8334919491, null, null],
+      vc_psj:    [-4755,    48001806,  123472886, 114017470, null, null],
+      vc_total:  [218417335,303508518, 420686538, 340892990, null, null]
     },
     qr: {
       adopt:     [0.03, 2.55, 2.96, 2.47, null, null],
-      q_psj:     [3,    189,  202,  150,  null, null],
-      q_total:   [9194, 7416, 6818, 6066, null, null],
-      tpv_ars:   [948000,    47530059,  60102302,  27346363,  null, null],
-      tpv_total: [8245520325,8763577691,8254500561,6453249183,null, null],
-      vc_psj:    [-101,     3018226,  3798226,  3194549,  null, null],
-      vc_total:  [57248417, 69994504, 63946109, 57505675, null, null]
+      q_psj:     [3,    189,  202,  152,  null, null],
+      q_total:   [9194, 7416, 6818, 6150, null, null],
+      tpv_ars:   [948000,    47530059,  60102302,  27592903,  null, null],
+      tpv_total: [8245520325,8763577691,8254500561,6682448087,null, null],
+      vc_psj:    [-101,     3018226,  3798226,  3209034,  null, null],
+      vc_total:  [57248417, 69994504, 63946109, 59408648, null, null]
     }
   },
   '202602': {
-    optin: 27249,
+    optin: 26607,
     point: {
-      adopt:     [0.46, 9.62, 10.61, null, null, null],
-      q_psj:     [22,   474,  478,   null, null, null],
-      q_total:   [4783, 4926, 4505,  null, null, null],
-      tpv_ars:   [40035868,   269115842,  306596261,  null, null, null],
-      tpv_total: [5508283366, 5873034719, 4857209076, null, null, null],
-      vc_psj:    [2139013,  37599481,  40839855,  null, null, null],
-      vc_total:  [117970838,198276554, 171579131, null, null, null]
+      adopt:     [0.46, 9.62, 10.76, null, null, null],
+      q_psj:     [22,   474,  489,   null, null, null],
+      q_total:   [4783, 4926, 4543,  null, null, null],
+      tpv_ars:   [40035868,   269115842,  312962323,  null, null, null],
+      tpv_total: [5508283366, 5873034719, 5046776369, null, null, null],
+      vc_psj:    [2139013,  37599481,  41694633,  null, null, null],
+      vc_total:  [117970838,198276554, 179148797, null, null, null]
     },
     qr: {
-      adopt:     [0.12, 1.64, 1.58, null, null, null],
-      q_psj:     [10,   101,  84,   null, null, null],
-      q_total:   [8171, 6165, 5315, null, null, null],
-      tpv_ars:   [3615623,   20365249,  26129649,  null, null, null],
-      tpv_total: [5181297289,5289954311,4478165122,null, null, null],
-      vc_psj:    [17520,    1379521,  4549969,  null, null, null],
-      vc_total:  [35125433, 37145802, 39114984, null, null, null]
+      adopt:     [0.12, 1.64, 1.62, null, null, null],
+      q_psj:     [10,   101,  87,   null, null, null],
+      q_total:   [8171, 6165, 5377, null, null, null],
+      tpv_ars:   [3615623,   20365249,  26307889,  null, null, null],
+      tpv_total: [5181297289,5289954311,4637920536,null, null, null],
+      vc_psj:    [17520,    1379521,  4563281,  null, null, null],
+      vc_total:  [35125433, 37145802, 40373728, null, null, null]
     }
   },
   '202603': {
-    optin: 21951,
+    optin: 22671,
     point: {
-      adopt:     [0.34, 10.43, null, null, null, null],
-      q_psj:     [22,   670,   null, null, null, null],
-      q_total:   [6497, 6422,  null, null, null, null],
-      tpv_ars:   [10090361,   323824258,  null, null, null, null],
-      tpv_total: [5964071899, 5940767408, null, null, null, null],
-      vc_psj:    [138670,   39138968,  null, null, null, null],
-      vc_total:  [150087134,208861017, null, null, null, null]
+      adopt:     [0.34, 10.73, null, null, null, null],
+      q_psj:     [22,   694,   null, null, null, null],
+      q_total:   [6497, 6466,  null, null, null, null],
+      tpv_ars:   [10090361,   337011562,  null, null, null, null],
+      tpv_total: [5964071899, 6176527997, null, null, null, null],
+      vc_psj:    [138670,   40843051,  null, null, null, null],
+      vc_total:  [150087134,217689915, null, null, null, null]
     },
     qr: {
-      adopt:     [0.10, 1.78, null, null, null, null],
-      q_psj:     [7,    103,  null, null, null, null],
-      q_total:   [7183, 5792, null, null, null, null],
-      tpv_ars:   [4033647,   17797709,  null, null, null, null],
-      tpv_total: [5607014935,5169632541,null, null, null, null],
-      vc_psj:    [122265,   2057523,  null, null, null, null],
-      vc_total:  [33282259, 40148875, null, null, null, null]
+      adopt:     [0.10, 1.80, null, null, null, null],
+      q_psj:     [7,    105,  null, null, null, null],
+      q_total:   [7183, 5843, null, null, null, null],
+      tpv_ars:   [4033647,   18857276,  null, null, null, null],
+      tpv_total: [5607014935,5346629076,null, null, null, null],
+      vc_psj:    [122265,   2227753,  null, null, null, null],
+      vc_total:  [33282259, 41695745, null, null, null, null]
     }
   }
 };
@@ -344,7 +344,7 @@ new Chart(document.getElementById('chartFuentes'), {
   type: 'doughnut',
   data: {
     labels: ['Circle', 'Ad Hoc Modal Bloqueante', 'Ad Hoc Modal FTU', 'Ad Hoc WhatsApp'],
-    datasets: [{ data: [7274, 8841, 2163, 3673], backgroundColor: ['#FFD200','#FF8F00','#FFB300','#1a1a1a'], borderWidth: 2 }]
+    datasets: [{ data: [7994, 8841, 2163, 3673], backgroundColor: ['#FFD200','#FF8F00','#FFB300','#1a1a1a'], borderWidth: 2 }]
   },
   options: {
     responsive: true,
@@ -361,8 +361,8 @@ new Chart(document.getElementById('chartAdopcion'), {
   data: {
     labels: MESES_EVOL,
     datasets: [
-      { label: '% Adopción Point M0', data: [14.37, 17.79, 15.69, 9.62, 10.43], backgroundColor: '#FFD200', borderRadius: 4 },
-      { label: '% Adopción QR M0',    data: [2.04,  2.82,  2.55,  1.64, 1.78],  backgroundColor: '#1a1a1a', borderRadius: 4 }
+      { label: '% Adopción Point M0', data: [14.37, 17.79, 15.69, 9.62, 10.73], backgroundColor: '#FFD200', borderRadius: 4 },
+      { label: '% Adopción QR M0',    data: [2.04,  2.82,  2.55,  1.64, 1.80],  backgroundColor: '#1a1a1a', borderRadius: 4 }
     ]
   },
   options: {
