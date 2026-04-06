@@ -49,7 +49,7 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
 
 <div class="top-bar">
   <h1>PSJ — Cuotas sin Interés · Dashboard de Resultados</h1>
-  <span class="fecha">Actualizado: 28/03/2026</span>
+  <span class="fecha">Actualizado: 06/04/2026</span>
 </div>
 
 <div class="tabs">
@@ -182,11 +182,60 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
 
 <!-- PAGE 3: CANALES -->
 <div class="page" id="page2">
-  <div class="placeholder">
-    <div class="icon">📡</div>
-    <p><strong>Canales PSJ — pendiente de datos</strong></p>
-    <p style="margin-top:8px">Correr la query de canales PSJ desde BQ Console y compartir el resultado para actualizar esta sección.</p>
-    <p style="margin-top:8px; font-size:11px; color:#bbb">La query ya está lista (misma estructura que Suscripciones, filtra Producto = 'PSJ')</p>
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="label">Audiencia Total</div>
+      <div class="value">356.497</div>
+      <div class="sub">sellers PSJ elegibles Mar-26</div>
+    </div>
+    <div class="kpi">
+      <div class="label">Reach Único</div>
+      <div class="value">330.113</div>
+      <div class="sub"><span class="up">92.6% de audiencia</span></div>
+    </div>
+    <div class="kpi">
+      <div class="label">Open Único</div>
+      <div class="value">75.346</div>
+      <div class="sub"><span class="up">21.1% de audiencia</span></div>
+    </div>
+    <div class="kpi">
+      <div class="label">Open / Reach</div>
+      <div class="value">22.8%</div>
+      <div class="sub">de los alcanzados, interactuaron</div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-box full">
+      <h3>Reach y Open por canal — Mar 2026</h3>
+      <canvas id="chartCanalesPsj" height="110"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Reach por tipo de seller</h3>
+      <canvas id="chartReachTipo" height="200"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-box" style="margin-bottom:24px;">
+    <h3>Detalle por tipo de seller — Mar 2026</h3>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Tipo Seller</th>
+          <th>Audiencia</th>
+          <th>Reach Push</th>
+          <th>Open Push</th>
+          <th>Reach Modal</th>
+          <th>Tap Modal</th>
+          <th>Reach Shortcut</th>
+          <th>Open Shortcut</th>
+          <th>Reach Total</th>
+          <th>Reach %</th>
+          <th>Open %</th>
+        </tr>
+      </thead>
+      <tbody id="tablaCanalesPsj"></tbody>
+    </table>
   </div>
 </div>
 
@@ -645,6 +694,82 @@ COHORT_LIST.forEach(c => {
     <td>${fmtUSD(vcTotal)}</td>
   </tr>`;
 });
+
+// ---- PAGE 3: CANALES PSJ ----
+const CANALES_PSJ = [
+  {tipo:'Link de Pago', aud:80924,  rPush:52030,  oPush:4031, rModal:69301,  tModal:16883, rShort:62497,  oShort:3769, rTotal:74432,  oTotal:19915},
+  {tipo:'Point Smart',  aud:169942, rPush:110896, oPush:8461, rModal:143762, tModal:26253, rShort:113674, oShort:2473, rTotal:157488, oTotal:33073},
+  {tipo:'QR',           aud:105631, rPush:71768,  oPush:5034, rModal:89701,  tModal:18344, rShort:74532,  oShort:1664, rTotal:98193,  oTotal:22358},
+];
+
+new Chart(document.getElementById('chartCanalesPsj'), {
+  type: 'bar',
+  data: {
+    labels: ['Push', 'Modal', 'Shortcut'],
+    datasets: [
+      { label: 'Reach', data: [234694, 302764, 250703], backgroundColor: '#FFD200', borderRadius: 4 },
+      { label: 'Open/Tap', data: [17526, 61480, 7906], backgroundColor: '#1a1a1a', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => (v/1000).toFixed(0)+'K' } }
+    }
+  }
+});
+
+const TIPO_COLORS = ['#FFD200','#FF8F00','#1a1a1a'];
+new Chart(document.getElementById('chartReachTipo'), {
+  type: 'doughnut',
+  data: {
+    labels: CANALES_PSJ.map(d => d.tipo),
+    datasets: [{ data: CANALES_PSJ.map(d => d.rTotal), backgroundColor: TIPO_COLORS, borderWidth: 2 }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 11 } } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${fmt(ctx.raw)}` } }
+    }
+  }
+});
+
+const tblPsj = document.getElementById('tablaCanalesPsj');
+CANALES_PSJ.forEach(d => {
+  const rPct = (d.rTotal/d.aud*100).toFixed(1);
+  const oPct = (d.oTotal/d.aud*100).toFixed(1);
+  tblPsj.innerHTML += `<tr>
+    <td>${d.tipo}</td>
+    <td>${fmt(d.aud)}</td>
+    <td>${fmt(d.rPush)}</td>
+    <td>${fmt(d.oPush)}</td>
+    <td>${fmt(d.rModal)}</td>
+    <td>${fmt(d.tModal)}</td>
+    <td>${fmt(d.rShort)}</td>
+    <td>${fmt(d.oShort)}</td>
+    <td><strong>${fmt(d.rTotal)}</strong></td>
+    <td><span class="badge green">${rPct}%</span></td>
+    <td><span class="badge yellow">${oPct}%</span></td>
+  </tr>`;
+});
+// Fila total
+const totAud=356497, totRT=330113, totOT=75346;
+tblPsj.innerHTML += `<tr style="font-weight:700;background:#fffde7">
+  <td>TOTAL</td>
+  <td>${fmt(totAud)}</td>
+  <td>${fmt(234694)}</td>
+  <td>${fmt(17526)}</td>
+  <td>${fmt(302764)}</td>
+  <td>${fmt(61480)}</td>
+  <td>${fmt(250703)}</td>
+  <td>${fmt(7906)}</td>
+  <td><strong>${fmt(totRT)}</strong></td>
+  <td><span class="badge green">${(totRT/totAud*100).toFixed(1)}%</span></td>
+  <td><span class="badge yellow">${(totOT/totAud*100).toFixed(1)}%</span></td>
+</tr>`;
 
 // ---- TABS ----
 function showPage(i) {
