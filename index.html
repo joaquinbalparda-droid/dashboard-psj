@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Dashboard PSJ — Cuotas sin Interés</title>
+<title>Dashboard PSJ â€” Cuotas sin InterÃ©s</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,14 +48,14 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
 <body>
 
 <div class="top-bar">
-  <h1>PSJ — Cuotas sin Interés · Dashboard de Resultados</h1>
-  <span class="fecha">Actualizado: 06/04/2026</span>
+  <h1>PSJ â€” Cuotas sin InterÃ©s Â· Dashboard de Resultados</h1>
+  <span class="fecha">Actualizado: 07/04/2026</span>
 </div>
 
 <div class="tabs">
-  <div class="tab active" onclick="showPage(0)">📊 Resumen del Mes</div>
-  <div class="tab" onclick="showPage(1)">📈 Impacto por Cohort</div>
-  <div class="tab" onclick="showPage(2)">📡 Canales</div>
+  <div class="tab active" onclick="showPage(0)">ðŸ“Š Resumen del Mes</div>
+  <div class="tab" onclick="showPage(1)">ðŸ“ˆ Impacto por Cohort</div>
+  <div class="tab" onclick="showPage(2)">ðŸ“¡ Canales</div>
 </div>
 
 <!-- PAGE 1: RESUMEN -->
@@ -64,7 +64,7 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
     <div class="kpi">
       <div class="label">Nuevos opt-ins Mar-26</div>
       <div class="value">22.671</div>
-      <div class="sub"><span class="down">▼ -3.936 vs feb</span></div>
+      <div class="sub"><span class="down">â–¼ -3.936 vs feb</span></div>
     </div>
     <div class="kpi">
       <div class="label">Activos PSJ Point M0</div>
@@ -72,9 +72,9 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
       <div class="sub">de 6.638 sellers Point</div>
     </div>
     <div class="kpi">
-      <div class="label">% Adopción Point</div>
+      <div class="label">% AdopciÃ³n Point</div>
       <div class="value">11,6%</div>
-      <div class="sub">Mar-26 · M0</div>
+      <div class="sub">Mar-26 Â· M0</div>
     </div>
     <div class="kpi">
       <div class="label">Activos PSJ QR M0</div>
@@ -82,30 +82,30 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
       <div class="sub">de 6.012 sellers QR</div>
     </div>
     <div class="kpi">
-      <div class="label">% Adopción QR</div>
+      <div class="label">% AdopciÃ³n QR</div>
       <div class="value">2,0%</div>
-      <div class="sub">Mar-26 · M0</div>
+      <div class="sub">Mar-26 Â· M0</div>
     </div>
   </div>
 
   <div class="chart-row">
     <div class="chart-box full">
-      <h3>Nuevos opt-ins por mes — por fuente de activación</h3>
+      <h3>Nuevos opt-ins por mes â€” por fuente de activaciÃ³n</h3>
       <canvas id="chartOptins" height="100"></canvas>
     </div>
     <div class="chart-box">
-      <h3>Mix de fuentes — Mar-26</h3>
+      <h3>Mix de fuentes â€” Mar-26</h3>
       <canvas id="chartFuentes" height="200"></canvas>
     </div>
   </div>
 
   <div class="chart-row">
     <div class="chart-box full">
-      <h3>% Adopción PSJ en M0 por cohort — Point vs QR</h3>
+      <h3>% AdopciÃ³n PSJ en M0 por cohort â€” Point vs QR</h3>
       <canvas id="chartAdopcion" height="110"></canvas>
     </div>
     <div class="chart-box">
-      <h3>Opt-ins histórico por fuente</h3>
+      <h3>Opt-ins histÃ³rico por fuente</h3>
       <table class="tbl" style="margin-top:4px">
         <thead><tr><th>Fuente</th><th>Total</th><th>%</th></tr></thead>
         <tbody id="tablaFuentes"></tbody>
@@ -132,35 +132,35 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
 
   <div class="chart-row">
     <div class="chart-box full">
-      <h3 id="chartQTitle">Sellers con opt-in vs Sellers con cobro PSJ — por mes de vida (Point)</h3>
+      <h3 id="chartQTitle">Sellers con opt-in vs Sellers con cobro PSJ â€” por mes de vida (Point)</h3>
       <canvas id="chartQ" height="110"></canvas>
     </div>
   </div>
 
   <div class="chart-row">
     <div class="chart-box full">
-      <h3 id="chartTpvTotalIncrTitle">TPV Incremental TOTAL vs M-1 — ARS (Point)</h3>
+      <h3 id="chartTpvTotalIncrTitle">TPV Incremental TOTAL vs M-1 â€” ARS (Point)</h3>
       <canvas id="chartTpvTotalIncr" height="110"></canvas>
     </div>
     <div class="chart-box full">
-      <h3 id="chartTpvPsjTitle">TPV PSJ Incremental vs M-1 — ARS (Point)</h3>
+      <h3 id="chartTpvPsjTitle">TPV PSJ Incremental vs M-1 â€” ARS (Point)</h3>
       <canvas id="chartTpvPsj" height="110"></canvas>
     </div>
   </div>
 
   <div class="chart-row">
     <div class="chart-box full">
-      <h3 id="chartVcTotalTitle">VC TOTAL — USD por mes de vida (Point)</h3>
+      <h3 id="chartVcTotalTitle">VC TOTAL â€” USD por mes de vida (Point)</h3>
       <canvas id="chartVcTotal" height="110"></canvas>
     </div>
     <div class="chart-box full">
-      <h3 id="chartVcPsjTitle">VC PSJ Incremental vs M-1 — USD (Point)</h3>
+      <h3 id="chartVcPsjTitle">VC PSJ Incremental vs M-1 â€” USD (Point)</h3>
       <canvas id="chartVcPsj" height="110"></canvas>
     </div>
   </div>
 
   <div class="chart-box" style="margin-bottom:24px;">
-    <h3>Resultados por cohort — Nov-25 / Mar-26</h3>
+    <h3>Resultados por cohort â€” Nov-25 / Mar-26</h3>
     <table class="tbl">
       <thead>
         <tr>
@@ -189,25 +189,25 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
       <div class="sub">sellers PSJ elegibles Mar-26</div>
     </div>
     <div class="kpi">
-      <div class="label">Reach Único</div>
+      <div class="label">Reach Ãšnico</div>
       <div class="value">330.113</div>
       <div class="sub"><span class="up">92.6% de audiencia</span></div>
     </div>
     <div class="kpi">
-      <div class="label">Open Único</div>
+      <div class="label">Open Ãšnico</div>
       <div class="value">75.346</div>
       <div class="sub"><span class="up">21.1% de audiencia</span></div>
     </div>
     <div class="kpi">
       <div class="label">Open / Reach</div>
-      <div class="value">22.8%</div>
+      <div class="value">22,8%</div>
       <div class="sub">de los alcanzados, interactuaron</div>
     </div>
   </div>
 
   <div class="chart-row">
     <div class="chart-box full">
-      <h3>Reach y Open por canal — Mar 2026</h3>
+      <h3>Reach y Open por canal â€” Mar 2026</h3>
       <canvas id="chartCanalesPsj" height="110"></canvas>
     </div>
     <div class="chart-box">
@@ -217,7 +217,7 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
   </div>
 
   <div class="chart-box" style="margin-bottom:24px;">
-    <h3>Detalle por tipo de seller — Mar 2026</h3>
+    <h3>Detalle por tipo de seller â€” Mar 2026</h3>
     <table class="tbl">
       <thead>
         <tr>
@@ -263,106 +263,106 @@ const PSJ_DATA = {
   '202511': {
     optin: 25852,
     point: {
-      adopt:     [1.03, 14.37, 17.63, 16.42, 15.50, 15.69],
-      q_psj:     [108,  1500,  1830,  1552,  1415,  1390],
-      q_total:   [10448,10440, 10379, 9450,  9127,  8862],
-      tpv_ars:   [51875298,   623636026,  1206715999, 972563497,  802539197,  864382242],
-      tpv_total: [7870813705, 8797842979, 11647697460,9904375719, 8741353558, 8296060456],
-      vc_psj:    [480507,   39806624,  86618654,  64300913,  119313265, 110828344],
-      vc_total:  [150872970,233145039, 335270796, 279795584, 366666643, 330677446]
+      adopt:     [1,03, 14,37, 17,63, 16,42, 15,5, 15,68, 7,66],
+      q_psj:     [108, 1500, 1830, 1552, 1415, 1390, 396],
+      q_total:   [10448, 10440, 10379, 9450, 9127, 8862, 5172],
+      tpv_ars:   [51875298, 623636026, 1206715999, 972563497, 802539197, 864382242, 111600815],
+      tpv_total: [7870813705, 8797842979, 11647697460, 9904375719, 8741353558, 8296060456, 1495223896],
+      vc_psj:    [480507, 39806624, 86618654, 64300913, 119313265, 110828344, 16463540],
+      vc_total:  [150872970, 233145039, 335270796, 279795584, 366666643, 330677446, 56668096]
     },
     qr: {
-      adopt:     [0.10, 2.04, 3.07, 2.56, 2.52, 2.55],
-      q_psj:     [10,   174,  251,  190,  178,  174],
-      q_total:   [10113,8533, 8167, 7428, 7064, 6821],
-      tpv_ars:   [1123312,   27330742,  39360218,  42975914,  36109314,  36153517],
-      tpv_total: [5516418272,6253850485,8494471129,8360705140,7537584023,6973463582],
-      vc_psj:    [20533,   1879889,  2766750,  2257394,  2357144,  5027713],
-      vc_total:  [37349479,49662078, 66542316, 64813379, 54401199, 60171127]
+      adopt:     [0,1, 2,04, 3,07, 2,56, 2,52, 2,55, 1,22],
+      q_psj:     [10, 174, 251, 190, 178, 174, 43],
+      q_total:   [10113, 8533, 8167, 7428, 7064, 6821, 3536],
+      tpv_ars:   [1123312, 27330742, 39360218, 42975914, 36109314, 36153517, 6312312],
+      tpv_total: [5516418272, 6253850485, 8494471129, 8360705140, 7537584023, 6973463582, 1324397151],
+      vc_psj:    [20533, 1879889, 2766750, 2257394, 2357144, 5027713, 835077],
+      vc_total:  [37349479, 49662078, 66542316, 64813379, 54401199, 60171127, 11471248]
     }
   },
   '202512': {
     optin: 37603,
     point: {
-      adopt:     [0.48, 17.79, 16.65, 16.43, 16.95, null],
-      q_psj:     [54,   2225,  1846,  1740,  1757,  null],
-      q_total:   [11183,12507, 11084, 10588, 10363, null],
-      tpv_ars:   [13281670,   1628788084, 1716004328, 1698328033, 1489484749, null],
-      tpv_total: [13019667740,19606733664,17036315004,15408319280,14555736748,null],
-      vc_psj:    [40207,   103317787, 95196842,  237672260, 201848826, null],
-      vc_total:  [271839114,546241390, 471631497, 664181709, 582948574, null]
+      adopt:     [0,48, 17,79, 16,65, 16,43, 16,95, 8,38, null],
+      q_psj:     [54, 2225, 1846, 1740, 1757, 477, null],
+      q_total:   [11183, 12507, 11084, 10588, 10363, 5694, null],
+      tpv_ars:   [13281670, 1628788084, 1716004328, 1698328033, 1489484749, 171886503, null],
+      tpv_total: [13019667740, 19606733664, 17036315004, 15408319280, 14555736748, 2664655784, null],
+      vc_psj:    [40207, 103317787, 95196842, 237672260, 201848826, 27108723, null],
+      vc_total:  [271839114, 546241390, 471631497, 664181709, 582948574, 95050504, null]
     },
     qr: {
-      adopt:     [0.12, 2.82, 2.51, 2.69, 2.77, null],
-      q_psj:     [17,   335,  261,  258,  258,  null],
-      q_total:   [13697,11875,10401,9605, 9307, null],
-      tpv_ars:   [5517815,   77090238,  63690866,  74071642,  47592361,  null],
-      tpv_total: [10474140060,15108374033,14372375533,12980665718,12130010975,null],
-      vc_psj:    [197494,  5122066,  3859649,  4488675,  6306696,  null],
-      vc_total:  [71891877,119975805,114386403,98499837, 100449870, null]
+      adopt:     [0,12, 2,82, 2,51, 2,69, 2,77, 1,06, null],
+      q_psj:     [17, 335, 261, 258, 258, 50, null],
+      q_total:   [13697, 11875, 10401, 9605, 9307, 4704, null],
+      tpv_ars:   [5517815, 77090238, 63690866, 74071642, 47592361, 4805593, null],
+      tpv_total: [10474140060, 15108374033, 14372375533, 12980665718, 12130010975, 2278401289, null],
+      vc_psj:    [197494, 5122066, 3859649, 4488675, 6306696, 626896, null],
+      vc_total:  [71891877, 119975805, 114386403, 98499837, 100449870, 19432597, null]
     }
   },
   '202601': {
     optin: 28052,
     point: {
-      adopt:     [0.30, 15.69, 16.96, 18.11, null, null],
-      q_psj:     [23,   1146,  1185,  1227,  null, null],
-      q_total:   [7590, 7306,  6986,  6774,  null, null],
-      tpv_ars:   [27016923,   783316816,  939674511,  1048210055, null, null],
-      tpv_total: [10367264458,10825981963,10188351800,9663140308, null, null],
-      vc_psj:    [-4755,    48001806,  123472886, 120854102, null, null],
-      vc_total:  [218417335,303508518, 420686538, 367276728, null, null]
+      adopt:     [0,3, 15,69, 16,96, 18,11, 9,69, null, null],
+      q_psj:     [23, 1146, 1185, 1227, 370, null, null],
+      q_total:   [7590, 7306, 6986, 6774, 3818, null, null],
+      tpv_ars:   [27016923, 783316816, 939674511, 1048210055, 190914528, null, null],
+      tpv_total: [10367264458, 10825981963, 10188351800, 9663140308, 1844047834, null, null],
+      vc_psj:    [-4755, 48001806, 123472886, 120854102, 24514817, null, null],
+      vc_total:  [218417335, 303508518, 420686538, 367276728, 73553863, null, null]
     },
     qr: {
-      adopt:     [0.03, 2.55, 2.96, 2.88, null, null],
-      q_psj:     [3,    189,  202,  185,  null, null],
-      q_total:   [9194, 7416, 6818, 6428, null, null],
-      tpv_ars:   [948000,    47530059,  60102302,  36689593,  null, null],
-      tpv_total: [8245520325,8763577691,8254500561,7642157630,null, null],
-      vc_psj:    [-101,     3018226,  3798226,  3578326,  null, null],
-      vc_total:  [57248417, 69994504, 63946109, 66382454, null, null]
+      adopt:     [0,03, 2,55, 2,96, 2,88, 1,67, null, null],
+      q_psj:     [3, 189, 202, 185, 54, null, null],
+      q_total:   [9194, 7416, 6818, 6428, 3243, null, null],
+      tpv_ars:   [948000, 47530059, 60102302, 36689593, 7235754, null, null],
+      tpv_total: [8245520325, 8763577691, 8254500561, 7642157630, 1467937184, null, null],
+      vc_psj:    [-101, 3018226, 3798226, 3578326, 719209, null, null],
+      vc_total:  [57248417, 69994504, 63946109, 66382454, 13016178, null, null]
     }
   },
   '202602': {
     optin: 26607,
     point: {
-      adopt:     [0.46, 9.62, 11.59, null, null, null],
-      q_psj:     [22,   474,  547,   null, null, null],
-      q_total:   [4783, 4926, 4718,  null, null, null],
-      tpv_ars:   [40035868,   269115842,  397028935,  null, null, null],
-      tpv_total: [5508283366, 5873034719, 5863135456, null, null, null],
-      vc_psj:    [2139013,  37599481,  46350975,  null, null, null],
-      vc_total:  [117970838,198276554, 196780291, null, null, null]
+      adopt:     [0,46, 9,62, 11,59, 6,46, null, null, null],
+      q_psj:     [22, 474, 547, 179, null, null, null],
+      q_total:   [4783, 4926, 4718, 2769, null, null, null],
+      tpv_ars:   [40035868, 269115842, 397028935, 79274660, null, null, null],
+      tpv_total: [5508283366, 5873034719, 5863135456, 1137031189, null, null, null],
+      vc_psj:    [2139013, 37599481, 46350975, 10189925, null, null, null],
+      vc_total:  [117970838, 198276554, 196780291, 40496750, null, null, null]
     },
     qr: {
-      adopt:     [0.12, 1.64, 1.78, null, null, null],
-      q_psj:     [10,   101,  100,  null, null, null],
-      q_total:   [8171, 6165, 5623, null, null, null],
-      tpv_ars:   [3615623,   20365249,  29606529,  null, null, null],
-      tpv_total: [5181297289,5289954311,5307789230,null, null, null],
-      vc_psj:    [17520,    1379521,  4746318,  null, null, null],
-      vc_total:  [35125433, 37145802, 44625711, null, null, null]
+      adopt:     [0,12, 1,64, 1,78, 0,57, null, null, null],
+      q_psj:     [10, 101, 100, 15, null, null, null],
+      q_total:   [8171, 6165, 5623, 2614, null, null, null],
+      tpv_ars:   [3615623, 20365249, 29606529, 2114427, null, null, null],
+      tpv_total: [5181297289, 5289954311, 5307789230, 953465536, null, null, null],
+      vc_psj:    [17520, 1379521, 4746318, 278820, null, null, null],
+      vc_total:  [35125433, 37145802, 44625711, 7254532, null, null, null]
     }
   },
   '202603': {
     optin: 22671,
     point: {
-      adopt:     [0.34, 11.65, null, null, null, null],
-      q_psj:     [22,   773,   null, null, null, null],
-      q_total:   [6497, 6638,  null, null, null, null],
-      tpv_ars:   [10090361,   417368072,  null, null, null, null],
-      tpv_total: [5964071899, 7185157879, null, null, null, null],
-      vc_psj:    [138670,   43508251,  null, null, null, null],
-      vc_total:  [150087134,238840994, null, null, null, null]
+      adopt:     [0,34, 11,65, 5,08, null, null, null, null],
+      q_psj:     [22, 773, 202, null, null, null, null],
+      q_total:   [6497, 6638, 3979, null, null, null, null],
+      tpv_ars:   [10090361, 417368072, 76503241, null, null, null, null],
+      tpv_total: [5964071899, 7185157879, 1369937620, null, null, null, null],
+      vc_psj:    [138670, 43508251, 9789668, null, null, null, null],
+      vc_total:  [150087134, 238840994, 46422147, null, null, null, null]
     },
     qr: {
-      adopt:     [0.10, 2.05, null, null, null, null],
-      q_psj:     [7,    123,  null, null, null, null],
-      q_total:   [7183, 6012, null, null, null, null],
-      tpv_ars:   [4033647,   20822116,  null, null, null, null],
-      tpv_total: [5607014935,6131265603,null, null, null, null],
-      vc_psj:    [122265,   2239738,  null, null, null, null],
-      vc_total:  [33282259, 46392324, null, null, null, null]
+      adopt:     [0,1, 2,05, 0,66, null, null, null, null],
+      q_psj:     [7, 123, 21, null, null, null, null],
+      q_total:   [7183, 6012, 3160, null, null, null, null],
+      tpv_ars:   [4033647, 20822116, 3853263, null, null, null, null],
+      tpv_total: [5607014935, 6131265603, 1133624569, null, null, null, null],
+      vc_psj:    [122265, 2239738, 518055, null, null, null, null],
+      vc_total:  [33282259, 46392324, 9376176, null, null, null, null]
     }
   }
 };
@@ -404,14 +404,14 @@ new Chart(document.getElementById('chartFuentes'), {
   }
 });
 
-// Adopción M0 Point vs QR por cohort
+// AdopciÃ³n M0 Point vs QR por cohort
 new Chart(document.getElementById('chartAdopcion'), {
   type: 'bar',
   data: {
     labels: MESES_EVOL,
     datasets: [
-      { label: '% Adopción Point M0', data: [14.37, 17.79, 15.69, 9.62, 11.65], backgroundColor: '#FFD200', borderRadius: 4 },
-      { label: '% Adopción QR M0',    data: [2.04,  2.82,  2.55,  1.64, 2.05],  backgroundColor: '#1a1a1a', borderRadius: 4 }
+      { label: '% AdopciÃ³n Point M0', data: [14.37, 17.79, 15.69, 9.62, 11,60], backgroundColor: '#FFD200', borderRadius: 4 },
+      { label: '% AdopciÃ³n QR M0',    data: [2.04,  2.82,  2.55,  1.64, 2,00],  backgroundColor: '#1a1a1a', borderRadius: 4 }
     ]
   },
   options: {
@@ -424,7 +424,7 @@ new Chart(document.getElementById('chartAdopcion'), {
   }
 });
 
-// Tabla fuentes históricas
+// Tabla fuentes histÃ³ricas
 const fuentesTotals = [
   { f: 'Circle (Always On)',    n: 11407+36719+20032+11215+7274 },
   { f: 'Ad Hoc Modal',          n: 14445+884+1971+5810+11004 },
@@ -445,7 +445,7 @@ COHORT_LIST.forEach(c => {
 });
 
 function fmtBig(n) {
-  if (n === null) return '—';
+  if (n === null) return 'â€”';
   const abs = Math.abs(n);
   if (abs >= 1e9) return (n/1e9).toFixed(1)+'B';
   return (n/1e6).toFixed(0)+'M';
@@ -460,20 +460,20 @@ function computeKpiImpacto(prod, cf) {
     if (d.q_psj[1] !== null) sumQpsj += d.q_psj[1];
     if (d.vc_psj[1] !== null && d.vc_psj[1] > 0) sumVc += d.vc_psj[1];
   });
-  return { adoptM0: cntAdopt > 0 ? (sumAdopt/cntAdopt).toFixed(1) : '—', qPsj: sumQpsj, vcM0: sumVc };
+  return { adoptM0: cntAdopt > 0 ? (sumAdopt/cntAdopt).toFixed(1) : 'â€”', qPsj: sumQpsj, vcM0: sumVc };
 }
 
 function updateKpiImpacto(prod, cf) {
   const k = computeKpiImpacto(prod, cf);
   const pl = prod === 'point' ? 'Point' : 'QR';
   document.getElementById('kpiImpacto').innerHTML = `
-    <div class="kpi"><div class="label">% Adopción M0 Prom (${pl})</div><div class="value">${k.adoptM0}%</div><div class="sub">promedio cohorts seleccionados</div></div>
+    <div class="kpi"><div class="label">% AdopciÃ³n M0 Prom (${pl})</div><div class="value">${k.adoptM0}%</div><div class="sub">promedio cohorts seleccionados</div></div>
     <div class="kpi"><div class="label">Sellers PSJ ${pl} M0</div><div class="value">${fmt(k.qPsj)}</div><div class="sub">activaciones en el mes</div></div>
     <div class="kpi"><div class="label">VC PSJ ${pl} M0</div><div class="value">USD ${fmtBig(k.vcM0)}</div><div class="sub">rentabilidad generada</div></div>
   `;
 }
 
-// Aggregate incremental vs M-1 (suma a través de cohorts con datos en M-1 y Mi)
+// Aggregate incremental vs M-1 (suma a travÃ©s de cohorts con datos en M-1 y Mi)
 function aggrIncr(prod, cf, field) {
   const nM = 6, vals = new Array(nM).fill(null);
   for (let i = 0; i < nM; i++) {
@@ -490,7 +490,7 @@ function aggrIncr(prod, cf, field) {
   return vals;
 }
 
-// Aggregate absolute (suma a través de cohorts)
+// Aggregate absolute (suma a travÃ©s de cohorts)
 function aggrAbs(prod, cf, field) {
   const nM = 6, vals = new Array(nM).fill(null);
   for (let i = 0; i < nM; i++) {
@@ -644,31 +644,31 @@ function updateImpacto() {
   qChart.data.datasets[0].data = q.qTot;
   qChart.data.datasets[1].data = q.qPsj;
   qChart.update();
-  document.getElementById('chartQTitle').textContent = `Sellers con opt-in vs Sellers con cobro PSJ — por mes de vida (${pl})`;
+  document.getElementById('chartQTitle').textContent = `Sellers con opt-in vs Sellers con cobro PSJ â€” por mes de vida (${pl})`;
 
   const tpvTotIncr = aggrIncr(prod, cf, 'tpv_total');
   tpvTotalIncrChart.data.datasets[0].data = tpvTotIncr;
   tpvTotalIncrChart.data.datasets[0].backgroundColor = tpvTotIncr.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#FFD200');
   tpvTotalIncrChart.update();
-  document.getElementById('chartTpvTotalIncrTitle').textContent = `TPV Incremental TOTAL vs M-1 — ARS (${pl})`;
+  document.getElementById('chartTpvTotalIncrTitle').textContent = `TPV Incremental TOTAL vs M-1 â€” ARS (${pl})`;
 
   const tpvP = aggrIncr(prod, cf, 'tpv_ars');
   tpvPsjChart.data.datasets[0].data = tpvP;
   tpvPsjChart.data.datasets[0].backgroundColor = tpvP.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#FFD200');
   tpvPsjChart.update();
-  document.getElementById('chartTpvPsjTitle').textContent = `TPV PSJ Incremental vs M-1 — ARS (${pl})`;
+  document.getElementById('chartTpvPsjTitle').textContent = `TPV PSJ Incremental vs M-1 â€” ARS (${pl})`;
 
   const vcT = aggrAbs(prod, cf, 'vc_total');
   vcTotalChart.data.datasets[0].data = vcT;
   vcTotalChart.data.datasets[0].backgroundColor = vcT.map((_,i)=>i===0?'#e0e0e0':'#546e7a');
   vcTotalChart.update();
-  document.getElementById('chartVcTotalTitle').textContent = `VC TOTAL — USD por mes de vida (${pl})`;
+  document.getElementById('chartVcTotalTitle').textContent = `VC TOTAL â€” USD por mes de vida (${pl})`;
 
   const vcP = aggrIncr(prod, cf, 'vc_psj');
   vcPsjChart.data.datasets[0].data = vcP;
   vcPsjChart.data.datasets[0].backgroundColor = vcP.map((v,i)=>i===0?'#e0e0e0':v<0?'#ef9a9a':'#FFD200');
   vcPsjChart.update();
-  document.getElementById('chartVcPsjTitle').textContent = `VC PSJ Incremental vs M-1 — USD (${pl})`;
+  document.getElementById('chartVcPsjTitle').textContent = `VC PSJ Incremental vs M-1 â€” USD (${pl})`;
 
   updateKpiImpacto(prod, cf);
 }
@@ -677,8 +677,8 @@ function updateImpacto() {
 const tbody = document.getElementById('tablaCohorts');
 COHORT_LIST.forEach(c => {
   const d = PSJ_DATA[c];
-  const pAdopt = d.point.adopt[1] !== null ? d.point.adopt[1].toFixed(1) : '—';
-  const qAdopt = d.qr.adopt[1] !== null ? d.qr.adopt[1].toFixed(1) : '—';
+  const pAdopt = d.point.adopt[1] !== null ? d.point.adopt[1].toFixed(1) : 'â€”';
+  const qAdopt = d.qr.adopt[1] !== null ? d.qr.adopt[1].toFixed(1) : 'â€”';
   const pBadge = d.point.adopt[1] >= 15 ? 'green' : d.point.adopt[1] >= 10 ? 'yellow' : 'red';
   const qBadge = d.qr.adopt[1] >= 2.5 ? 'green' : d.qr.adopt[1] >= 1.5 ? 'yellow' : 'red';
   const vcTotal = (d.point.vc_psj[1] || 0) + (d.qr.vc_psj[1] || 0);
@@ -697,9 +697,9 @@ COHORT_LIST.forEach(c => {
 
 // ---- PAGE 3: CANALES PSJ ----
 const CANALES_PSJ = [
-  {tipo:'Link de Pago', aud:80924,  rPush:52030,  oPush:4031, rModal:69301,  tModal:16883, rShort:62497,  oShort:3769, rTotal:74432,  oTotal:19915},
-  {tipo:'Point Smart',  aud:169942, rPush:110896, oPush:8461, rModal:143762, tModal:26253, rShort:113674, oShort:2473, rTotal:157488, oTotal:33073},
-  {tipo:'QR',           aud:105631, rPush:71768,  oPush:5034, rModal:89701,  tModal:18344, rShort:74532,  oShort:1664, rTotal:98193,  oTotal:22358},
+  {tipo:'Link de Pago', aud:80924, rPush:52030, oPush:4031, rModal:69301, tModal:16883, rShort:62497, oShort:3769, rTotal:74432, oTotal:19915},
+  {tipo:'Point Smart', aud:169942, rPush:110896, oPush:8461, rModal:143762, tModal:26253, rShort:113674, oShort:2473, rTotal:157488, oTotal:33073},
+  {tipo:'QR', aud:105631, rPush:71768, oPush:5034, rModal:89701, tModal:18344, rShort:74532, oShort:1664, rTotal:98193, oTotal:22358},
 ];
 
 new Chart(document.getElementById('chartCanalesPsj'), {
@@ -779,3 +779,4 @@ function showPage(i) {
 </script>
 </body>
 </html>
+
