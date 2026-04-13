@@ -185,22 +185,22 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
   <div class="kpi-row">
     <div class="kpi">
       <div class="label">Audiencia Total</div>
-      <div class="value">0</div>
+      <div class="value">356.497</div>
       <div class="sub">sellers PSJ elegibles Mar-26</div>
     </div>
     <div class="kpi">
       <div class="label">Reach Ãšnico</div>
-      <div class="value">0</div>
+      <div class="value">330.113</div>
       <div class="sub"><span class="up">92.6% de audiencia</span></div>
     </div>
     <div class="kpi">
       <div class="label">Open Ãšnico</div>
-      <div class="value">0</div>
+      <div class="value">75.346</div>
       <div class="sub"><span class="up">21.1% de audiencia</span></div>
     </div>
     <div class="kpi">
       <div class="label">Open / Reach</div>
-      <div class="value">0,0%</div>
+      <div class="value">22,8%</div>
       <div class="sub">de los alcanzados, interactuaron</div>
     </div>
   </div>
@@ -260,6 +260,111 @@ const OPTIN_WSPP   = [0,     1,     6188,  10224, 3673];
 // tpv_ars = TPV ARS PSJ sellers total | tpv_total = TPV ARS TOTAL sellers
 // vc_psj = VC USD PSJ sellers total   | vc_total  = VC USD TOTAL sellers
 const PSJ_DATA = {
+  '202511': {
+    optin: 0,
+    point: {
+      adopt:     [1,03, 14,37, 17,63, 16,42, 15,5, 15,68, 10,72],
+      q_psj:     [108, 1500, 1830, 1552, 1415, 1390, 741],
+      q_total:   [10448, 10440, 10379, 9450, 9127, 8862, 6911],
+      tpv_ars:   [51875298, 623636026, 1206715999, 972563497, 802539197, 864382242, 332973049],
+      tpv_total: [7870813705, 8797842979, 11647697460, 9904375719, 8741353558, 8296060456, 3378850016],
+      vc_psj:    [480507, 39806624, 86618654, 64300913, 119313265, 110828344, 49375164],
+      vc_total:  [150872970, 233145039, 335270796, 279795584, 366666643, 330677446, 148500230]
+    },
+    qr: {
+      adopt:     [0,1, 2,04, 3,07, 2,56, 2,52, 2,55, 1,69],
+      q_psj:     [10, 174, 251, 190, 178, 174, 83],
+      q_total:   [10113, 8533, 8167, 7428, 7064, 6821, 4917],
+      tpv_ars:   [1123312, 27330742, 39360218, 42975914, 36109314, 36153517, 13076295],
+      tpv_total: [5516418272, 6253850485, 8494471129, 8360705140, 7537584023, 6973463582, 2828791541],
+      vc_psj:    [20533, 1879889, 2766750, 2257394, 2357144, 5027713, 1476909],
+      vc_total:  [37349479, 49662078, 66542316, 64813379, 54401199, 60171127, 24009884]
+    }
+  },
+  '202512': {
+    optin: 0,
+    point: {
+      adopt:     [0,48, 17,79, 16,65, 16,43, 16,95, 12,21, null],
+      q_psj:     [54, 2225, 1846, 1740, 1757, 935, null],
+      q_total:   [11183, 12507, 11084, 10588, 10363, 7655, null],
+      tpv_ars:   [13281670, 1628788084, 1716004328, 1698328033, 1489484749, 505933613, null],
+      tpv_total: [13019667740, 19606733664, 17036315004, 15408319280, 14555736748, 5966424309, null],
+      vc_psj:    [40207, 103317787, 95196842, 237672260, 201848826, 79526979, null],
+      vc_total:  [271839114, 546241390, 471631497, 664181709, 582948574, 249987829, null]
+    },
+    qr: {
+      adopt:     [0,12, 2,82, 2,51, 2,69, 2,77, 1,79, null],
+      q_psj:     [17, 335, 261, 258, 258, 116, null],
+      q_total:   [13697, 11875, 10401, 9605, 9307, 6475, null],
+      tpv_ars:   [5517815, 77090238, 63690866, 74071642, 47592361, 15406907, null],
+      tpv_total: [10474140060, 15108374033, 14372375533, 12980665718, 12130010975, 4919453652, null],
+      vc_psj:    [197494, 5122066, 3859649, 4488675, 6306696, 2078054, null],
+      vc_total:  [71891877, 119975805, 114386403, 98499837, 100449870, 43898724, null]
+    }
+  },
+  '202601': {
+    optin: 0,
+    point: {
+      adopt:     [0,3, 15,69, 16,96, 18,11, 13,62, null, null],
+      q_psj:     [23, 1146, 1185, 1227, 705, null, null],
+      q_total:   [7590, 7306, 6986, 6774, 5178, null, null],
+      tpv_ars:   [27016923, 783316816, 939674511, 1048210055, 486367960, null, null],
+      tpv_total: [10367264458, 10825981963, 10188351800, 9663140308, 4100317776, null, null],
+      vc_psj:    [-4755, 48001806, 123472886, 120854102, 66300701, null, null],
+      vc_total:  [218417335, 303508518, 420686538, 367276728, 180158606, null, null]
+    },
+    qr: {
+      adopt:     [0,03, 2,55, 2,96, 2,88, 2,27, null, null],
+      q_psj:     [3, 189, 202, 185, 102, null, null],
+      q_total:   [9194, 7416, 6818, 6428, 4498, null, null],
+      tpv_ars:   [948000, 47530059, 60102302, 36689593, 24270406, null, null],
+      tpv_total: [8245520325, 8763577691, 8254500561, 7642157630, 3164345959, null, null],
+      vc_psj:    [-101, 3018226, 3798226, 3578326, 2687683, null, null],
+      vc_total:  [57248417, 69994504, 63946109, 66382454, 29058336, null, null]
+    }
+  },
+  '202602': {
+    optin: 0,
+    point: {
+      adopt:     [0,46, 9,62, 11,59, 8,76, null, null, null],
+      q_psj:     [22, 474, 547, 318, null, null, null],
+      q_total:   [4783, 4926, 4718, 3632, null, null, null],
+      tpv_ars:   [40035868, 269115842, 397028935, 179530928, null, null, null],
+      tpv_total: [5508283366, 5873034719, 5863135456, 2518409518, null, null, null],
+      vc_psj:    [2139013, 37599481, 46350975, 24792395, null, null, null],
+      vc_total:  [117970838, 198276554, 196780291, 97367857, null, null, null]
+    },
+    qr: {
+      adopt:     [0,12, 1,64, 1,78, 1,1, null, null, null],
+      q_psj:     [10, 101, 100, 41, null, null, null],
+      q_total:   [8171, 6165, 5623, 3712, null, null, null],
+      tpv_ars:   [3615623, 20365249, 29606529, 14862231, null, null, null],
+      tpv_total: [5181297289, 5289954311, 5307789230, 2115046109, null, null, null],
+      vc_psj:    [17520, 1379521, 4746318, 1094817, null, null, null],
+      vc_total:  [35125433, 37145802, 44625711, 18035298, null, null, null]
+    }
+  },
+  '202603': {
+    optin: 0,
+    point: {
+      adopt:     [0,34, 11,65, 8,05, null, null, null, null],
+      q_psj:     [22, 773, 411, null, null, null, null],
+      q_total:   [6497, 6638, 5106, null, null, null, null],
+      tpv_ars:   [10090361, 417368072, 176389780, null, null, null, null],
+      tpv_total: [5964071899, 7185157879, 3021728378, null, null, null, null],
+      vc_psj:    [138670, 43508251, 21747666, null, null, null, null],
+      vc_total:  [150087134, 238840994, 108460283, null, null, null, null]
+    },
+    qr: {
+      adopt:     [0,1, 2,05, 1,33, null, null, null, null],
+      q_psj:     [7, 123, 57, null, null, null, null],
+      q_total:   [7183, 6012, 4286, null, null, null, null],
+      tpv_ars:   [4033647, 20822116, 14037491, null, null, null, null],
+      tpv_total: [5607014935, 6131265603, 2474541397, null, null, null, null],
+      vc_psj:    [122265, 2239738, 971846, null, null, null, null],
+      vc_total:  [33282259, 46392324, 21238397, null, null, null, null]
+    }
+  }
 };
 
 // ---- PAGE 1 CHARTS ----
@@ -305,8 +410,8 @@ new Chart(document.getElementById('chartAdopcion'), {
   data: {
     labels: MESES_EVOL,
     datasets: [
-      { label: '% AdopciÃ³n Point M0', data: [14.37, 17.79, 15.69, 9.62, 11,60], backgroundColor: '#FFD200', borderRadius: 4 },
-      { label: '% AdopciÃ³n QR M0',    data: [2.04,  2.82,  2.55,  1.64, 2,00],  backgroundColor: '#1a1a1a', borderRadius: 4 }
+      { label: '% AdopciÃ³n Point M0', data: [14.37, 17.79, 15.69, 9.62, 11,11,60], backgroundColor: '#FFD200', borderRadius: 4 },
+      { label: '% AdopciÃ³n QR M0',    data: [2.04,  2.82,  2.55,  1.64, 2,2,00],  backgroundColor: '#1a1a1a', borderRadius: 4 }
     ]
   },
   options: {
@@ -592,10 +697,9 @@ COHORT_LIST.forEach(c => {
 
 // ---- PAGE 3: CANALES PSJ ----
 const CANALES_PSJ = [
-  {tipo:'', aud:, rPush:, oPush:, rModal:, tModal:, rShort:, oShort:, rTotal:, oTotal:},
-  {tipo:'', aud:, rPush:, oPush:, rModal:, tModal:, rShort:, oShort:, rTotal:, oTotal:},
-  {tipo:'', aud:, rPush:, oPush:, rModal:, tModal:, rShort:, oShort:, rTotal:, oTotal:},
-  {tipo:'', aud:, rPush:, oPush:, rModal:, tModal:, rShort:, oShort:, rTotal:, oTotal:},
+  {tipo:'Link de Pago', aud:80924, rPush:52030, oPush:4031, rModal:69301, tModal:16883, rShort:62497, oShort:3769, rTotal:74432, oTotal:19915},
+  {tipo:'Point Smart', aud:169942, rPush:110896, oPush:8461, rModal:143762, tModal:26253, rShort:113674, oShort:2473, rTotal:157488, oTotal:33073},
+  {tipo:'QR', aud:105631, rPush:71768, oPush:5034, rModal:89701, tModal:18344, rShort:74532, oShort:1664, rTotal:98193, oTotal:22358},
 ];
 
 new Chart(document.getElementById('chartCanalesPsj'), {
@@ -675,6 +779,7 @@ function showPage(i) {
 </script>
 </body>
 </html>
+
 
 
 
