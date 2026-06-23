@@ -49,7 +49,7 @@ body { font-family: Arial, sans-serif; background: #f0f0f0; }
 
 <div class="top-bar">
   <h1>PSJ â€” Cuotas sin InterÃ©s Â· Dashboard de Resultados</h1>
-  <span class="fecha">Actualizado: 10/06/2026</span>
+  <span class="fecha">Actualizado: 23/06/2026</span>
 </div>
 
 <div class="tabs">
@@ -410,22 +410,22 @@ const PSJ_DATA = {
   '202606': {
     optin: 0,
     point: {
-      adopt:     [null, null, null, null, null, null, null],
-      q_psj:     [],
-      q_total:   [2, null, null, null, null, null, null],
-      tpv_ars:   [null, null, null, null, null, null, null],
-      tpv_total: [2046934, null, null, null, null, null, null],
-      vc_psj:    [null, null, null, null, null, null, null],
-      vc_total:  [101129, null, null, null, null, null, null]
+      adopt:     [15,33, null, null, null, null, null, null],
+      q_psj:     [299, null, null, null, null, null, null],
+      q_total:   [1951, null, null, null, null, null, null],
+      tpv_ars:   [254007698, null, null, null, null, null, null],
+      tpv_total: [2358599317, null, null, null, null, null, null],
+      vc_psj:    [20679553, null, null, null, null, null, null],
+      vc_total:  [75605340, null, null, null, null, null, null]
     },
     qr: {
-      adopt:     [null, null, null, null, null, null, null],
-      q_psj:     [],
-      q_total:   [1, null, null, null, null, null, null],
-      tpv_ars:   [null, null, null, null, null, null, null],
-      tpv_total: [20000, null, null, null, null, null, null],
-      vc_psj:    [null, null, null, null, null, null, null],
-      vc_total:  [-23, null, null, null, null, null, null]
+      adopt:     [3,9, null, null, null, null, null, null],
+      q_psj:     [82, null, null, null, null, null, null],
+      q_total:   [2105, null, null, null, null, null, null],
+      tpv_ars:   [17029070, null, null, null, null, null, null],
+      tpv_total: [2201253140, null, null, null, null, null, null],
+      vc_psj:    [1357887, null, null, null, null, null, null],
+      vc_total:  [21001164, null, null, null, null, null, null]
     }
   }
 };
@@ -473,8 +473,8 @@ new Chart(document.getElementById('chartAdopcion'), {
   data: {
     labels: MESES_EVOL,
     datasets: [
-      { label: '% AdopciÃ³n Point M0', data: [14.37, 17.79, 15.69, 9.62, 11,11,11,11,11,11,11,11,11,11,44,44,0,0,34,0,00], backgroundColor: '#FFD200', borderRadius: 4 },
-      { label: '% AdopciÃ³n QR M0',    data: [2.04,  2.82,  2.55,  1.64, 2,2,2,2,2,2,2,2,2,2,9,9,8,8,8,0,00],  backgroundColor: '#1a1a1a', borderRadius: 4 }
+      { label: '% AdopciÃ³n Point M0', data: [14.37, 17.79, 15.69, 9.62, 11,11,11,11,11,11,11,11,11,11,44,44,0,0,34,0,0,00], backgroundColor: '#FFD200', borderRadius: 4 },
+      { label: '% AdopciÃ³n QR M0',    data: [2.04,  2.82,  2.55,  1.64, 2,2,2,2,2,2,2,2,2,2,9,9,8,8,8,0,0,00],  backgroundColor: '#1a1a1a', borderRadius: 4 }
     ]
   },
   options: {
@@ -842,6 +842,7 @@ function showPage(i) {
 </script>
 </body>
 </html>
+
 
 
 
